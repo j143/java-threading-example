@@ -7,6 +7,8 @@ public class App {
     // https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html
     // private Object lock1 = new Object();
 
+    // Second thread have to wait until the first thread completes the
+    // execution due to instrinsic lock
     public synchronized void increment() {
         count++;
     }
