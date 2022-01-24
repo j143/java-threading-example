@@ -7,7 +7,8 @@ import java.util.Random;
 public class Worker {
 
     private Random random = new Random();
-    private List<Integer> list = new ArrayList<Integer>();
+    private List<Integer> list1 = new ArrayList<Integer>();
+    private List<Integer> list2 = new ArrayList<Integer>();
 
     public synchronized void stageOne() {
         // to simulate that it is getting some info from
@@ -18,11 +19,17 @@ public class Worker {
             e.printStackTrace();
         }
 
-        list.add(random.nextInt());
+        list1.add(random.nextInt());
     }
 
     public synchronized void stageTwo() {
-        // do nothing
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        list2.add(random.nextInt());
     }
 
     public void process() {
@@ -35,7 +42,7 @@ public class Worker {
     public void main() {
         System.out.println("Starting time: " + System.currentTimeMillis());
         long startTime = System.currentTimeMillis();
-//        process();
+
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
