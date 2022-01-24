@@ -7,26 +7,35 @@ import java.util.Random;
 public class Worker {
 
     private Random random = new Random();
+
+    // use seperate locks for independent methods
+    private Object lock1 = new Object();
+    private Object lock2 = new Object();
+
     private List<Integer> list1 = new ArrayList<Integer>();
     private List<Integer> list2 = new ArrayList<Integer>();
 
     public synchronized void stageOne() {
         // to simulate that it is getting some info from
         // somewhere
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized (lock1) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         list1.add(random.nextInt());
     }
 
     public synchronized void stageTwo() {
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized (lock2) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         list2.add(random.nextInt());
