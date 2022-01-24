@@ -4,7 +4,15 @@ import java.util.Scanner;
 
 class processor extends Thread {
 
-    private boolean running = true;
+    // https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html
+    // Atomic actions cannot be interleaved, so they can be used without fear of thread interference. However,
+    // this does not eliminate all need to synchronize atomic actions, because memory consistency errors are
+    // still possible. Using volatile variables reduces the risk of memory consistency errors, because any
+    // write to a volatile variable establishes a happens-before relationship with subsequent reads of that
+    // same variable.
+    //
+    // Reads and writes are atomic for all variables declared volatile (including long and double variables).
+    private volatile boolean running = true;
 
     @Override
     public void run() {
