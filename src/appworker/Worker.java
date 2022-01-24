@@ -8,7 +8,7 @@ public class Worker {
 
     private Random random = new Random();
 
-    // use seperate locks for independent methods
+    // use separate locks for independent methods
     private Object lock1 = new Object();
     private Object lock2 = new Object();
 
