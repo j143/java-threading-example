@@ -1,7 +1,8 @@
 package threaddemo2;
 
-class Runner extends Thread {
+class Runner implements Runnable {
 
+    @Override
     public void run() {
         for(int i=0; i<10; i++) {
             System.out.println("Hello" + i);
@@ -12,5 +13,8 @@ class Runner extends Thread {
 public class App {
 
     public static void main(String[] args) {
+        Thread t1 = new Thread(new Runner());
+
+        t1.start();
     }
 }
