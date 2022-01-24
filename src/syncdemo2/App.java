@@ -5,7 +5,11 @@ public class App {
     private int count = 0;
 
     // https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html
-    private Object lock1 = new Object();
+    // private Object lock1 = new Object();
+
+    public synchronized void increment() {
+        count++;
+    }
 
     public static void main(String[] args) {
         App app = new App();
@@ -16,26 +20,19 @@ public class App {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (lock1) {
-                    for(int i=0; i<10000; i++) {
-                        // read `count`, increment by 1 and store in `count`
-                        count = count + 1;
-                    }
+                for(int i=0; i<10000; i++) {
+                    // read `count`, increment by 1 and store in `count`
+                    increment();
                 }
-
             }
         });
 
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (lock1) {
-                    for(int i=0; i<10000; i++) {
-                        // read `count`, increment by 1 and store in `count`
-                        count = count + 1;
-                    }
+                for(int i=0; i<10000; i++) {
+                    increment();
                 }
-
             }
         });
 
