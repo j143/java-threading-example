@@ -1,8 +1,8 @@
+package threaddemo2;
 
 class Runner extends Thread {
-    @Override
+
     public void run() {
-        super.run();
         for(int i=0; i<10; i++) {
             System.out.println("Hello" + i);
         }
@@ -11,7 +11,6 @@ class Runner extends Thread {
 
 public class App {
 
-    public void main(String[] args) {
-        //
+    public static void main(String[] args) {
     }
 }
