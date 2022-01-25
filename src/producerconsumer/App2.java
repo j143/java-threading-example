@@ -31,12 +31,12 @@ class Processor {
         while (true) {
             synchronized (lock1) {
 
-                if(list.size() == LIMIT) {
+                if(list.size() == 0) {
                     lock1.wait();
                 }
-                System.out.println("Length of list is: " + list.size());
+                System.out.print("Length of list is: " + list.size());
                 int value = list.removeFirst();
-                System.out.println("Value removed is: " + value);
+                System.out.print("; Value removed is: " + value);
                 lock1.notify();
             }
 
