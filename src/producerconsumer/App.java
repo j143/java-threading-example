@@ -8,16 +8,24 @@ public class App {
 
     private static BlockingQueue<Integer> bq = new ArrayBlockingQueue<Integer>(10);
 
-    private static void producer() {
+    /**
+     * producer random number queue
+     *
+     * @throws InterruptedException
+     */
+    private static void producer() throws InterruptedException {
         Random random = new Random();
 
-        try {
+        while(true) {
             bq.put(random.nextInt(100));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
+    /**
+     * consumer - take a random number each time
+     *
+     * @throws InterruptedException
+     */
     private static void consumer() throws InterruptedException{
         Thread.sleep(100);
         Random random = new Random();
@@ -35,7 +43,11 @@ public class App {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                producer();
+                try {
+                    producer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
