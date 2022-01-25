@@ -30,8 +30,10 @@ public class App {
 
         ExecutorService es = Executors.newFixedThreadPool(3);
 
-        for(int i=0; i<100; i++)
+        for(int i=0; i<100; i++) {
             es.submit(new Processor(latch1));
+            System.out.println("---- " + i + " ----");
+        }
 
         try {
             latch1.await();
