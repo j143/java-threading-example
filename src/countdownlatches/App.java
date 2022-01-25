@@ -14,7 +14,7 @@ class Processor implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Process started." + latch.toString());
+        System.out.println("Process started, with active Thread count: " + Thread.activeCount());
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {
